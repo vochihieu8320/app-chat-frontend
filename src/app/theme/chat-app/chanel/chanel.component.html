@@ -1,0 +1,47 @@
+
+
+
+
+<div class="row justify-content-center">
+    <button type="button" class="btn btn-primary btn-outline-primary ripple light" (click)="openMyModal('effect-1')">Create your own channel</button>
+
+</div>
+ 
+<div *ngIf="loading" class="loader-block">
+    <svg id="loader2" viewBox="0 0 100 100">
+      <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
+    </svg>
+  </div>
+
+<app-modal-animation #modalTabs [modalID]="'effect-1'" [modalClass]="'md-effect-1'">
+    <h3>Create Your Own Channel</h3>
+    <div>
+        <form #validationForm="ngForm" class="editForm" novalidate>
+            <div class="row">
+              
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="form-label">Channel'name</label>
+                  <input type="text" class="form-control" name="name" style="color: black;"
+                   placeholder="Enter name" [ngClass]="{'is-invalid': !name.valid && (name.dirty || name.touched || isSubmit)}" #name="ngModel" minlength="6" required [(ngModel)]="formInput.name">
+                  <label *ngIf="!name.valid && (name.dirty || name.touched || isSubmit)" id="validation-name-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid name.</label>
+                </div>
+              </div>
+             
+            </div>
+            <div class="row justify-content-center mt-2">
+             
+              <button class="btn btn-primary btn-outline-primary ripple light"(click)="save($event)">Create your own channel</button>
+               
+
+            </div>
+            
+        </form>
+
+     
+    </div>
+    <button (click)="closeMyModal($event)" aria-label="Close" class="md-close-btn"><i class="icofont icofont-ui-close"></i></button>
+  </app-modal-animation> 
+
+  
+ 

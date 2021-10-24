@@ -1,0 +1,419 @@
+
+
+<div class="tab-content" id="pills-tabContent">
+<div class="page-body" >
+    <div class="card">
+
+      
+    
+      <div class="card-block email-card">
+
+        <div class="mail-body-header" style="text-align: end;" *ngIf="channels">
+          <button type="button" class="btn btn-primary btn-sm ripple light" (click)="openMyModal('effect-2')">
+            <i class="fas fa-user-plus"></i>
+          </button>
+          <app-modal-animation #modalTabs [modalID]="'effect-2'" [modalClass]="'md-effect-1'">
+           
+           
+              <div style="text-align: left;">
+                
+                
+                    <span  class="card-title" style="font-size: 22px;" *ngIf="channels"> #INVITE FRIENDS TO {{channels[current_picked].channels[0].name}}</span>
+                   
+                
+                
+                    <div class="row justify-content-start">
+                      <div class="col-sm-12">
+                        <p class="task-detail" style="font-size: 16px;">Share this link with others to grant access to your server</p>
+                        <p class="task-due">
+                        <label class="badge badge-inverse-primary" style="font-size: 13px;">{{invite_message}}</label>
+                      </p>
+                        <p class="task-due"><strong> Due : </strong><strong class="label label-danger">Never</strong></p>
+                      </div>
+                    
+                    </div>
+                    <div class="row justify-content-end mt-3">
+                      <button type="button" class="btn btn-primary btn-sm ripple light" (click) = "Copy()" >
+                        <span class="fas fa-copy"></span> Copy
+                      </button>
+                      <button type="button" class="btn btn-default btn-sm ripple light" (click)="closeMyModal('effect-2')">
+                        <span class="fa fa-ban"></span> Cancel
+                      </button>
+                      
+                    </div>
+               
+              </div>
+               
+              
+            
+            
+
+            
+          </app-modal-animation> 
+
+          <div ngbDropdown class="btn-group dropdown-split-primary ml-2">
+            <button ngbDropdownToggle type="button" class="btn btn-default btn-sm ripple light dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-cog"></i>
+            
+            </button>
+            <div ngbDropdownMenu class="dropdown-menu">
+              <!-- <a class="dropdown-item waves-effect waves-light" href="javascript:">Quit Channel</a> -->
+              <a class="dropdown-item waves-effect waves-light" href="javascript:" (click)="openMyModal('effect-4')">
+                <i class="fas fa-plus"></i>
+                <span>
+                  New Channel
+                </span>
+              </a>
+              <a class="dropdown-item waves-effect waves-light" href="javascript:" (click)="openMyModal('effect-3')">
+                <i class="icofont icofont-ui-edit" ></i>
+                <span>
+                  Edit Channel
+                </span>
+              </a>
+
+              <a class="dropdown-item waves-effect waves-light" href="javascript:" (click)="confirmAlert()">
+                <i class="icofont icofont-close-line"></i>
+                <span>
+                  Quit Channel
+
+                </span>
+              </a>
+            
+            </div>
+          </div>
+        
+          <app-modal-animation #modalTabs [modalID]="'effect-4'" [modalClass]="'md-effect-1'">
+            <h3>Create Your Own Channel</h3>
+            <div>
+                <form #validationForm="ngForm" class="editForm" novalidate>
+                    <div class="row">
+                      
+                      <div class="col-md-12">
+                        <div class="form-group " style="text-align: left;">
+                          <label class="form-label mb-2">Channel'name</label>
+                          <input type="text" class="form-control" name="name" style="color: black;"
+                           placeholder="Enter name" [ngClass]="{'is-invalid': !name.valid && (name.dirty || name.touched)}" #name="ngModel" minlength="6" required [(ngModel)]="formCreate.name">
+                          <label *ngIf="!name.valid && (name.dirty || name.touched || isSubmit)" id="validation-name-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid name.</label>
+                        </div>
+                      </div>
+                     
+                    </div>
+                    <div class="row justify-content-end">
+                      <button type="button" class="btn btn-primary btn-sm ripple light" (click)="createChannel()">
+                        <span class="fa fa-plus"></span> Create
+                      </button>
+                      <button type="button" class="btn btn-default btn-sm ripple light" (click)="closeMyModal('effect-4')">
+                        <span class="fa fa-ban"></span> Cancel
+                      </button>
+                      
+                    </div>
+                    
+                </form>
+                
+                
+             
+            </div>
+            <button (click)="closeMyModal('effect-4')" aria-label="Close" class="md-close-btn"><i class="icofont icofont-ui-close"></i></button>
+
+          </app-modal-animation> 
+          <app-modal-animation #modalTabs [modalID]="'effect-3'" [modalClass]="'md-effect-1'">
+            <h3>Update your channel</h3>
+           <div>
+            
+            <form #validationForm="ngForm" class="editForm" novalidate>
+              <div class="row justify-content-start">
+                
+                <div class="col-md-12">
+                  <div class="form-group" style="text-align: left;">
+                    <label class="form-label mb-2">Channel'name</label>
+                    <input type="text" class="form-control" name="name" style="color: black;"
+                     placeholder="Enter name" [ngClass]="{'is-invalid': !name.valid && (name.dirty || name.touched || isSubmit)}" #name="ngModel" minlength="6" required [(ngModel)]="formInput.name">
+                    <label *ngIf="!name.valid && (name.dirty || name.touched || isSubmit)" id="validation-name-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid name.</label>
+                  </div>
+      
+                </div>
+               
+              </div>
+              
+          </form>
+         
+          <div class="row justify-content-end">
+            <button type="button" class="btn btn-primary btn-sm ripple light" (click)="UpdateChannel()">
+              <span class="fa fa-upload"></span> Update
+            </button>
+            <button type="button" class="btn btn-default btn-sm ripple light" (click)="closeMyModal('effect-3')">
+              <span class="fa fa-ban"></span> Cancel
+            </button>
+            
+          </div>
+        
+           </div>
+           
+
+           <button (click)="closeMyModal('effect-3')" aria-label="Close" class="md-close-btn"><i class="icofont icofont-ui-close"></i></button>
+
+        </app-modal-animation>
+        </div>
+       
+        <div class="row">
+        
+          <div class="col-lg-12 col-xl-2" >
+            <div class="user-body mt-3" style="height: 300px; overflow-y: auto;">
+            
+            
+                <h5>Channels</h5>
+               
+
+             
+             
+              <ul class="page-list nav nav-tabs flex-column mt-2" id="pills-tab" role="tablist" *ngIf="channels">
+              
+                <li class="nav-item mail-section" *ngFor="let channel of channels; index as i ">
+               
+                  <a  [routerLinkActive]="['active']" class="nav-link waves-effect d-block " 
+                  [ngClass]="channel.is_picked ? 'active' : '' " data-toggle="pill"  role="tab"
+                  (click)="ChangeChannel(i)"
+                  >
+                   # {{channel.channels[0].name}}
+                  </a>
+                 
+               
+
+                
+              </ul>
+              
+            </div>
+          </div>
+       
+        
+          <div class="col-lg-12 col-xl-8">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="e-inbox" role="tabpanel">
+
+                    <div class="mail-body" style="height: 404px; overflow-y: auto;">
+                     
+                      <div class="mail-body-content">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <tr class="unread" *ngFor = "let message of messages" style="color: white;">
+                              
+                             
+                              <td *ngIf="!message.files">
+                                <ul style="list-style-type:none;">
+
+                                  <li *ngIf="message.author === username">
+                                    <p>
+                                      <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
+                                      You
+                                      <span>
+                                        {{message.date_time}}
+                                      </span>
+                                    </p>
+                                   
+                                    
+                                  </li>
+                                  <li *ngIf="message.author !== username">
+                                    <p>
+                                      <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
+                                    {{message.author}}
+                                    <span>
+                                      {{message.date_time}}
+                                    </span>
+                                  </p> 
+                                 
+                                 </li>
+                                  <li style="white-space: pre-wrap">{{message.content}}</li>
+                                  
+                                </ul>                                 
+                              </td>
+                              <td *ngIf="message.files && !message.is_video">
+                                <ul style="list-style-type:none;">
+
+                                <li *ngIf="message.author === username">
+                                  <p>
+                                    <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
+
+                                    You
+                                    <span>
+                                      {{message.date_time}}
+                                    </span>
+                                  </p>
+                                </li>
+                                  <li *ngIf="message.author !== username">
+                                    <p>
+                                      <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
+
+                                      {{message.author}}
+                                      <span>
+                                        {{message.date_time}}
+                                      </span>
+                                    </p> 
+                                  </li>
+                                <a href="{{message.files}}">
+                                  <img [src]="message.files"  alt="image" style="width: 320px ;height: 300px" />
+                                </a>  
+                                </ul>
+
+                              </td>
+                              <td *ngIf="message.files && message.is_video">
+                                <ul style="list-style-type:none;">
+                                <li *ngIf="message.author === username">
+                                  <p>
+                                    <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
+                                    You
+                                    <span>
+                                      {{message.date_time}}
+                                    </span>
+                                  </p>
+                                  
+                                </li>
+                                  <li *ngIf="message.author !== username">
+                                    <p>
+                                      <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
+
+                                      {{message.author}}
+                                      <span>
+                                        {{message.date_time}}
+                                      </span>
+                                    </p> 
+                                  </li>
+                                <video width="320" height="240" controls>
+                                  <source src="{{message.files}}" type="video/mp4">
+                                 
+                                </video>
+                                </ul>
+                              </td>
+                              
+                       
+                            
+                            
+                            </tr>
+                         
+                            
+                            
+                          </table>
+                        </div>
+                      </div>
+                    
+                    </div>
+                  </div>
+            </div>
+          </div>
+        
+          <div class="col-lg-12 col-xl-2">
+            <div class="user-body">
+
+                <ul class="p-20 label-list">
+                    <li>
+                    <h5>Onlines</h5>
+                    </li>
+                    <li *ngFor="let user of user_online">
+                  
+                    <div class="media" *ngIf="user.name !== username">
+                      <div class="media-left media-middle photo-table">
+                        <a href="javascript:;">
+                          <img class="media-object img-radius" src="assets/images/avatar-blank.jpg" alt="Generic placeholder image">
+                          <div class="live-status bg-success"></div>
+                        </a>
+                      </div>
+                      <div class="media-body">
+                        <h6 style="    
+                        position: relative;
+                        bottom: -14px;
+                        right: 23px">{{user.name}}</h6>
+                      
+                      </div>
+                    </div>
+                    </li>
+                   
+                </ul>
+            </div>
+        </div>
+      </div>
+    
+    </div>
+  
+  
+  </div>
+
+  <div class="row justify-content-center " style="position: fixed; bottom: 16px; width: 100%;">
+    <div class="col-sm-5 col-12 ">
+      <input type="text" placeholder="Enter some text"
+      [(ngModel)]="getMessages"
+      (keydown.enter)="sendMessage($event.target.value)"
+      style="    
+      width: 100%;
+      height: 45px;
+      border: 1px #ddd;
+      background: #ddd;
+      border-radius: 8px;">
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-primary btn-outline-primary btn-icon ripple ml-2 button_config"><i class="far fa-smile icon_config" ></i></button>
+      <button class="btn btn-primary btn-outline-primary btn-icon ripple ml-2 button_config" (click)="openMyModal('effect-1')"><i class="fas fa-file-image icon_config"></i></button>
+      <button class="btn btn-primary btn-outline-primary btn-icon ripple ml-2 button_config"><i class="fas fa-ellipsis-h icon_config"></i></button>
+    </div>
+  </div>
+  
+</div>
+</div>
+<app-modal-animation #modalTabs [modalID]="'effect-1'" [modalClass]="'md-effect-1'">
+ 
+  <div class="col">
+  
+    <label class="custom-file">
+      <input type="file" ng2FileSelect [uploader]="uploader" class="custom-file-input" (change)="validateFiles($event)" >
+      <span class="custom-file-control"></span>
+    </label>
+    <div class="table-responsive mt-3">
+      <table class="table">
+        <thead>
+        <tr>
+          <th width="50%">Name</th>
+          <th>Size</th>
+          <th>Progress</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td style="white-space: pre-wrap">
+            {{file_name}}
+          </td>
+          <td>
+            {{file_size}}
+          </td>
+          <td *ngIf="loading">
+            <div class="preloader3 loader-block">
+              <div class="circ1"></div>
+              <div class="circ2"></div>
+              <div class="circ3"></div>
+              <div class="circ4"></div>
+            </div>
+          </td>
+        </tr>
+      
+      
+        </tbody>
+      </table>
+     
+       
+    </div>
+    <div class="row justify-content-end">
+      <button type="button" class="btn btn-success btn-sm ripple light" (click) = uploadfile() >
+        <span class="fa fa-upload"></span> Upload
+      </button>
+      <button type="button" class="btn btn-warning btn-sm ripple light" (click)="closeMyModal('effect-1')">
+        <span class="fa fa-ban"></span> Cancel
+      </button>
+      
+    </div>
+   
+  </div>
+  
+      
+  <button (click)="closeMyModal('effect-1')" aria-label="Close" class="md-close-btn"><i class="icofont icofont-ui-close"></i></button>
+</app-modal-animation> 
+
+
+
+ 

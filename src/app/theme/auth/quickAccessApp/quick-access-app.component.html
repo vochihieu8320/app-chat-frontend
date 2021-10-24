@@ -1,0 +1,15 @@
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 text-center mt-5">
+        <!-- <h4 class="text-primary">The request is being processed…</h4> -->
+        <h4 class="{{styleNoti}}">{{notification}}</h4>
+        <div *ngIf="loading" class="loader-block">
+          <svg id="loader2" viewBox="0 0 100 100">
+            <circle id="circle-loader2" cx="50" cy="50" r="45"></circle>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

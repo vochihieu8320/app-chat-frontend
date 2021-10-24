@@ -1,0 +1,60 @@
+
+<section class="login-block">
+  <!-- Container-fluid starts -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- Authentication card start -->
+
+        <form [formGroup]="getAccountForm" (ngSubmit)="onSubmit()" class="md-float-material form-material" action="javascript:">
+          <div class="auth-box card">
+            <div class="card-block">
+              <div class="row m-b-20">
+                <div class="col-md-12">
+                  <h3 class="text-center">Quick Access</h3>
+                </div>
+              </div>
+
+              <div class="form-group form-primary">
+                <input type="text"formControlName="email" class="form-control" required="" [ngClass]="{ 'form-control-danger is-invalid': submitted && f.email.errors}">
+                <span class="form-bar"></span>
+                <label class="float-label">Your Email Address</label>
+              </div>
+              <div class="row m-t-30">
+                <div class="col-md-12">
+                  <button [disabled]="loading" type="submit" class="btn btn-primary btn-md btn-block waves-light text-center m-b-20 ripple">Submit</button>
+                </div>
+              </div>
+              <div class="row m-t-10">
+                <div class="col-md-12 ">
+                  <div *ngIf="loading">
+                    <div class="preloader3">
+                      <div class="circ1"></div>
+                      <div class="circ2"></div>
+                      <div class="circ3"></div>
+                      <div class="circ4"></div>
+                    </div>
+                  </div>
+                  <div *ngIf="!loading && !!error && !status" class="alert alert-danger icons-alert">{{error}}</div>
+                  <div *ngIf="!loading && !!notification && status" class="alert alert-success icons-alert">{{notification}}</div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-9">
+                  <p class="text-inverse text-left"><a [routerLink]="['/auth/login']"><b>Sign In</b></a></p>
+                </div>
+                <div class="col-3 text-right">
+                  <img src="assets/images/auth/iconlogohiq.png" alt="small-logo.png">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- end of col-sm-12 -->
+    </div>
+    <!-- end of row -->
+  </div>
+  <!-- end of container-fluid -->
+</section>

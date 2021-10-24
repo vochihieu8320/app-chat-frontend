@@ -1,0 +1,34 @@
+{
+    "include": [
+      {
+        "relation": "orderPerks",
+        "scope": {
+          "include": [
+            {
+              "relation": "perk"
+            },
+            {
+              "relation": "orderPerkItems",
+              "scope": {
+                "include": [
+                  {
+                    "relation": "item",
+                    "scope": {
+                      "include": [
+                        {
+                          "relation": "itemOptions"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "relation": "itemOption"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }

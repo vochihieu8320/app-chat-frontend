@@ -1,0 +1,58 @@
+{
+  "states": [
+    {
+      "id": 10,
+      "name": "Refund",
+      "color": "#E74C3C",
+      "allowUpdateOrder": false
+    },
+    {
+      "id": 20,
+      "name": "Unpaid",
+      "color": "#E74C3C",
+      "allowUpdateOrder": true
+    },
+    {
+      "id": 30,
+      "name": "Info Required",
+      "color": "#E74C3C",
+      "allowUpdateOrder": true
+    },
+    {
+      "id": 40,
+      "name": "Info Confirmed",
+      "color": "#1ABC9C",
+      "allowUpdateOrder": true
+    },
+    {
+      "id": 50,
+      "name": "On Hold",
+      "color": "#3498DB",
+      "allowUpdateOrder": true
+    },
+    {
+      "id": 60,
+      "name": "On Scheduled",
+      "color": "#1ABC9C",
+      "allowUpdateOrder": false
+    },
+    {
+      "id": 70,
+      "name": "Packaging",
+      "color": "#1ABC9C",
+      "allowUpdateOrder": false
+    },
+    {
+      "id": 80,
+      "name": "Shipped Out",
+      "color": "#1ABC9C",
+      "allowUpdateOrder": false
+    },
+    {
+      "id": 90,
+      "name": "Delivered",
+      "color": "#2ECC71",
+      "allowUpdateOrder": false
+    }
+  ]
+}

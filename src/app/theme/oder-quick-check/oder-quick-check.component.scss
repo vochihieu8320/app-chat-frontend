@@ -1,0 +1,19 @@
+.img_conf {
+  width: 30%;
+  margin-top: 15px;
+}
+
+
+
+@media screen and (max-width: 800px) {
+  .config_email_btn{ 
+    margin-top: 10px;
+    margin-left: 2px;
+    margin-right:9px;
+    width: 100%;
+  }
+  .config_input{
+    margin-right: 8px;
+  }
+ 
+}

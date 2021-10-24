@@ -1,0 +1,126 @@
+<section class="login-block">
+  <!-- Container-fluid starts -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <!-- Authentication card start -->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="md-float-material form-material m-b-40">
+          <div class="auth-box card">
+            <div class="card-block">
+              <div class="row m-b-20">
+                <div class="col-md-12">
+                  <h3 class="text-center txt-primary">Sign up</h3>
+                </div>
+              </div>
+              <div class="form-group form-primary">
+                <input type="text" formControlName="name" class="form-control" required
+                  [ngClass]="{ 'form-control-danger is-invalid': submitted && f.name.errors }">
+                <span class="form-bar"></span>
+                <label class="float-label">Your Name</label>
+                <label *ngIf="submitted && f.name.errors && f.name.errors.required"
+                  class="f-12 form-control-danger is-invalid">Name must be
+                  required</label>
+                <label *ngIf="submitted && f.name.errors && f.name.errors.minlength"
+                  class="f-12 form-control-danger is-invalid">Name
+                  should NOT be shorter than {{f.name.errors.minlength.requiredLength}} characters</label>
+                <label *ngIf="submitted && f.name.errors && f.name.errors.maxlength"
+                  class="f-12 form-control-danger is-invalid">Name should
+                  NOT be longer than {{f.name.errors.maxlength.requiredLength}} characters</label>
+              </div>
+              <div class="form-group form-primary">
+                <input type="text" formControlName="email" class="form-control" required=""
+                  [ngClass]="{ 'form-control-danger is-invalid': submitted && f.email.errors }">
+                <span class="form-bar"></span>
+                <label class="float-label">Your Email Address</label>
+                <label *ngIf="submitted && f.email.errors && f.email.errors.required"
+                  class="f-12 form-control-danger is-invalid">Email must be
+                  required</label>
+                <label *ngIf="submitted && f.email.errors && f.email.errors.email"
+                  class="f-12 form-control-danger is-invalid">Email invalid</label>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group form-primary">
+                    <input formControlName="password" type="password" class="form-control" required=""
+                      [ngClass]="{ 'form-control-danger is-invalid': submitted && f.password.errors }">
+                    <span class="form-bar"></span>
+                    <label class="float-label">Password</label>
+                    <label *ngIf="submitted && f.password.errors && f.password.errors.required"
+                      class="f-12 form-control-danger is-invalid">Password must be
+                      required</label>
+                    <label *ngIf="submitted && f.password.errors && f.password.errors.minlength"
+                      class="f-12 form-control-danger is-invalid">Password
+                      should NOT be shorter than {{f.password.errors.minlength.requiredLength}} characters</label>
+                    <label *ngIf="submitted && f.password.errors && f.password.errors.maxlength"
+                      class="f-12 form-control-danger is-invalid">Name should
+                      NOT be longer than {{f.password.errors.maxlength.requiredLength}} characters</label>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group form-primary">
+                    <input type="password" formControlName="confirmPassword" class="form-control" required=""
+                      [ngClass]="{ 'form-control-danger is-invalid': submitted && f.confirmPassword.errors }">
+                    <span class="form-bar"></span>
+                    <label class="float-label">Confirm Password</label>
+                    <label *ngIf="submitted && f.confirmPassword.errors && f.confirmPassword.errors.required"
+                    class="f-12 form-control-danger is-invalid">Confirm password must be
+                    required</label>
+                    <label *ngIf="submitted && f.confirmPassword.errors && !f.confirmPassword.errors.isMatching && !f.confirmPassword.errors.required"
+                    class="f-12 form-control-danger is-invalid">Confirm password invalid</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row m-t-25 text-left">
+                <div class="col-md-12">
+                  <div class="checkbox-fade fade-in-primary">
+                    <label>
+                      <input class="form-check-input" formControlName="acceptTerms" type="checkbox" value=""
+                        [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }"(change)="change($event.target.checked)">
+                      <span class="cr"><i class="cr-icon fa fa-check txt-danger"></i></span>
+                      <span class="text-inverse">I read and accept <a href="https://hiq.ai/terms-of-service">Terms
+                          &amp; Conditions.</a></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row m-t-30">
+                <div class="col-md-12">
+                  <button type="submit"
+                    class="btn btn-primary btn-md btn-block waves-light text-center m-b-20 ripple">Sign up
+                    now</button>
+                </div>
+              </div>
+              <div class="row m-t-10">
+                <div class="col-md-12 ">
+                  <div *ngIf="loading">
+                    <div class="preloader3">
+                      <div class="circ1"></div>
+                      <div class="circ2"></div>
+                      <div class="circ3"></div>
+                      <div class="circ4"></div>
+                    </div>
+                  </div>
+                  <div *ngIf="!loading && !!error && !status" class="alert alert-danger icons-alert">{{error}}</div>
+              
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-9">
+                  <p class="text-inverse text-left"><a [routerLink]="['/auth/login']"><b>Back To Sign In</b></a></p>
+                </div>
+                <div class="col-3 text-right">
+                  <img src="assets/images/auth/iconlogohiq.png" alt="small-logo.png">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Authentication card end -->
+      </div>
+      <!-- end of col-sm-12 -->
+    </div>
+    <!-- end of row -->
+  </div>
+  <!-- end of container-fluid -->
+</section>
