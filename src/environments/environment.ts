@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl : "http://127.0.0.1:3000",
-  domain: "http://localhost:4200"
-  //apiUrl : "https://ccm-api.hiq.ai"
+  // apiUrl : "http://127.0.0.1:3000",
+  domain: "http://localhost:4200",
+  apiUrl : " http://18.220.225.224"
 };
 //"ccm-be-ts.hiq.ai"
 /*

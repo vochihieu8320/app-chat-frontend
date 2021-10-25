@@ -116,6 +116,7 @@ const routes: Routes = [
       */
     ]
   },
+  
 
   {
     path:'order-quick-check',
