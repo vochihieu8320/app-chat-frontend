@@ -16,8 +16,11 @@ const routes: Routes = [
       {
         path:'user-channel/:userID',
         loadChildren: ()=> import('./user-channel/user-channel.module').then(m=> m.UserChannelModule)
+      },
+      {
+        path:'video/:channelID',
+        loadChildren: ()=> import('./video/video.module').then(m => m.VideoModule)
       }
-    
     ]
   },
 ];
