@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl : "https://ccm-api-test.hiq.ai"
+    apiUrl : "http://18.220.225.224"
   };
   
   
