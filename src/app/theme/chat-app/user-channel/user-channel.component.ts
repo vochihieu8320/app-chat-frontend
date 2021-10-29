@@ -102,7 +102,7 @@ export class UserChannelComponent implements OnInit {
    
     this.channels[0].is_picked = true;
     this.channelID = this.channels[0].channelID;
-    this.invite_message = `${environment.domain}/auth/invite/${this.channelID}`
+    this.invite_message = `https://app-chat-vch.herokuapp.com//auth/invite/${this.channelID}`
     this.current_picked = 0;
     this.formInput.name = this.channels[this.current_picked].channels[0].name
     
