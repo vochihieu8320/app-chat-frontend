@@ -276,7 +276,7 @@ export class UserChannelComponent implements OnInit {
   async ChangeChannel(i: any)
   {
    
-    this.invite_message = `${environment.domain}/auth/invite/${this.channels[this.current_picked]._id}`
+    this.invite_message = `https://app-chat-vch.herokuapp.com/auth/invite/${this.channels[this.current_picked]._id}`
     this.channels[this.current_picked].is_picked = false;
     this.channels[i].is_picked = true;
     this.current_picked = i;
