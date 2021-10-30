@@ -69,6 +69,8 @@ export class UserChannelComponent implements OnInit {
   invite_message: string;
   formInput: any;
   formCreate: any;
+  UserInformation: any;
+  loaddata: boolean = false
   default_img = "assets/images/avatar-blank.jpg";
   user_email: string;
   uploader: FileUploader = new FileUploader({
@@ -95,11 +97,21 @@ export class UserChannelComponent implements OnInit {
    this.formCreate = {
      name: ""
    }
+   this.UserInformation = {
+     name: "",
+     phone: "",
+     email: "",
+     address:"",
+     avatar:""
+   }
+
   }
 
   async ngOnInit(){
+    this.loading = true
     this.channels = <any> await this.services.getUserChannel(this.userID, 0);
-   
+    // this.UserInformation = <any> await this.services.getUserInfo(this.userID);
+    
     this.channels[0].is_picked = true;
     this.channelID = this.channels[0].channelID;
     this.invite_message = `https://app-chat-vch.herokuapp.com//auth/invite/${this.channelID}`
@@ -145,7 +157,15 @@ export class UserChannelComponent implements OnInit {
      this.user_online = userOnline
    })
 
-
+   this.socket.on("user-off-browser", (socketID: string)=>{
+     for(let i = 0  ; i < this.user_online.length; i++)
+     {
+       if(this.user_online[i]["socketID"] === socketID){
+         this.user_online.splice(i, 1);
+       }
+     }
+   })
+   this.loading = false
   }
 
 
@@ -166,8 +186,18 @@ export class UserChannelComponent implements OnInit {
     return unit;
   };
 
-  validateFiles(event: any){
+  validateFiles(event: any, modal: any){
+    
     this.file= event.target.files[0];
+    var reader = new FileReader();
+    // this.imagePath = files;
+    reader.readAsDataURL(this.file); 
+    reader.onload = (_event) => { 
+      this.UserInformation.avatar = reader.result; 
+    }
+
+
+
     this.file_name = this.file.name;
     const check_file = this.file.type.split('/');
     this.file_extension = check_file[1];
@@ -179,13 +209,13 @@ export class UserChannelComponent implements OnInit {
     if((this.file_type === "images" && !this.extensions_img.includes(this.file_extension)) || (this.file_type === "video" && !this.extensions_video.includes(this.file_extension)))
     {
 
-      this.closeMyModal("effect-1");
+      this.closeMyModal(modal);
       Swal.fire('Invalid file type!', '', 'error');
        return;
     }
     if(check_size > 8)
     {
-      this.closeMyModal("effect-1");
+      this.closeMyModal(modal);
       Swal.fire('Your file is too powerful', 'Max file size is 8.00MB please', 'error');
       return;
     }
@@ -381,6 +411,26 @@ export class UserChannelComponent implements OnInit {
       
       }
     });
+  }
+
+  async UserInfo(modal: any, user: any)
+  {
+    // this.openMyModal(modal);
+    
+    try {
+        this.UserInformation = <any>await this.services.getUserInfo(user.userID);
+        if(this.UserInformation)
+        {
+          this.openMyModal(modal);
+        }  
+    } catch (error) {
+      
+    }
+  }
+
+  async uploadAvatar()
+  {
+
   }
 }
 

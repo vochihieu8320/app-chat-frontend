@@ -108,6 +108,12 @@ export class AppChatService {
   }
  
 
+  async getUserInfo(userID: string)
+  {
+    await this.CreateHeader();
+    return this.http.get(`${environment.apiUrl}/users/${userID}`, {headers: this.Header}).toPromise();
+  }
+
 }
 
 

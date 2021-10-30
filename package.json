@@ -6,7 +6,7 @@
     "start": "node server.js",
     "start:prod": "pm2 start ecosystem.config.js --env production --only ccm.hiq.ai",
     "start:dev": "pm2 start ecosystem.config.js --env development --only ccm.hiq.ai",
-    "start:test": "pm2 start ecosystem.config.js --env test --only ccm-test.hiq.ai",
+    
     "build": "ng build",
     "build:prod": "ng build --prod",
     "build:test": "ng build --configuration=test",
