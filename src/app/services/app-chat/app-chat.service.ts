@@ -114,6 +114,18 @@ export class AppChatService {
     return this.http.get(`${environment.apiUrl}/users/${userID}`, {headers: this.Header}).toPromise();
   }
 
+  async updateUserInfo(userID: string, data: any)
+  {
+    await this.CreateHeader();
+    return this.http.put(`${environment.apiUrl}/users/${userID}`, data, {headers : this.Header}).toPromise();
+  }
+  //get infomartion of user who join the specify channel
+  async getChannelUserInfo(channelID: string)
+  {
+    await this.CreateHeader();
+    return this.http.get(`${environment.apiUrl}/channels-user/${channelID}/users`, {headers: this.Header}).toPromise();
+  }
+
 }
 
 

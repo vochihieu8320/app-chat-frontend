@@ -28,7 +28,10 @@ const routes: Routes = [
         path: 'chat-app',
         loadChildren: () => import('./theme/chat-app/chat-app.module').then(m => m.ChatAppModule)
       },
-      
+      {
+        path: 'user-profile/:userID',
+        loadChildren: ()=>import('./theme/user-profile/user-profile.module').then(m=> m.UserProfileModule)
+      }
      
     
      

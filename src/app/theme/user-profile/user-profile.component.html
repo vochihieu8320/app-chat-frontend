@@ -1,0 +1,103 @@
+<div class="page-body">
+    
+    <div class="preloader3 loader-block" *ngIf="loading">
+        <div class="circ1"></div>
+        <div class="circ2"></div>
+        <div class="circ3"></div>
+        <div class="circ4"></div>
+      </div>
+        <div class="row simple-cards users-card justify-content-center" *ngIf="!loading && UserInformation">
+            <div class="col-md-4 col-xl-4">
+              <div class="card user-card" style="text-align: center;">
+                <div class="card-header-img">
+                  <img class="img-fluid img-radius" src="{{UserInformation.avatar}}" alt="card-img">
+                  <h4>{{UserInformation.name}}</h4>
+                  <h5>{{UserInformation.email}}</h5>
+                  <h6>{{UserInformation.phone}}</h6>
+                </div>
+                <p>{{UserInformation.address}}</p>
+
+                <div>
+                  <button type="button" class="btn btn-success ripple light" (click)="openMyModal('effect-5')"><i class="icofont icofont-user m-r-5"></i>Update</button>
+                </div>
+              </div>
+            </div>
+       
+         
+          </div>
+          <app-modal-animation #modalTabs [modalID]="'effect-5'" [modalClass]="'md-effect-1'" *ngIf="UserInformation">
+            <h3>User's informartion</h3>
+             <div class="row">
+               <div class="col-sm-6 col-md-6 col-12">
+                 <a href="javascript:" class="profile-image mt-2">
+                   <img class="media-object img-radius" style="
+                   width: 100%;
+                   position: relative;
+                   left: -38px;
+                   height: 100%
+                   " src="{{UserInformation.avatar}}" alt="user-img" width="200px"
+                     height="200px">
+                 </a>
+                 <label class="custom-file" style="position: relative;
+                 left: -28px;">
+                   <input type="file" ng2FileSelect [uploader]="uploader" class="custom-file-input" (change)="validateFiles($event,'effect-5' )" accept="image/*"  >
+                   <span class="custom-file-control"></span>
+                 </label>
+               </div>
+               <div class="col-sm-6 col-md-6 col-12">
+                 <form #validationForm="ngForm" class="editForm" novalidate>
+                   <div class="row justify-content-start">
+                     
+                     <div class="col-md-12">
+                       <div class="form-group" style="text-align: left;">
+                         <label class="form-label mb-2">Name</label>
+                         <input type="text" class="form-control" name="name" style="color: black;"
+                          placeholder="Enter name" [ngClass]="{'is-invalid': !name.valid && (name.dirty || name.touched || isSubmit)}" #name="ngModel" minlength="6" required [(ngModel)]="UserInformation.name">
+                         <label *ngIf="!name.valid && (name.dirty || name.touched || isSubmit)" id="validation-name-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid name.</label>
+                       </div>
+           
+                     </div>
+                     <div class="col-md-12">
+                       <div class="form-group" style="text-align: left;">
+                         <label class="form-label mb-2">Email</label>
+                         <input type="email" class="form-control" name="email" style="color: black;"
+                          placeholder="Enter email" [ngClass]="{'is-invalid': !email.valid && (email.dirty || email.touched || isSubmit)}" #email="ngModel" minlength="6" required [(ngModel)]="UserInformation.email">
+                         <label *ngIf="!email.valid && (email.dirty || email.touched || isSubmit)" id="validation-name-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid name.</label>
+                       </div>
+           
+                     </div>
+                     <div class="col-md-12">
+                       <div class="form-group" style="text-align: left;">
+                         <label class="form-label mb-2">Phone</label>
+                         <input type="email" class="form-control" name="Phone" style="color: black;"
+                          placeholder="Enter phone" [ngClass]="{'is-invalid': !phone.valid && (phone.dirty || phone.touched || isSubmit)}" #phone="ngModel" minlength="6" required [(ngModel)]="UserInformation.phone">
+                         <label *ngIf="!phone.valid && (phone.dirty || phone.touched || isSubmit)" id="validation-name-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid name.</label>
+                       </div>
+           
+                     </div>
+                    
+                   </div>
+                   
+               </form>
+               </div>
+             </div>
+             <div class="preloader3 loader-block" *ngIf="uploadProfile">
+               <div class="circ1"></div>
+               <div class="circ2"></div>
+               <div class="circ3"></div>
+               <div class="circ4"></div>
+             </div>
+             <div class="row justify-content-end" >
+               <button type="button" class="btn btn-primary btn-sm ripple light" (click)="Update()">
+                 <span class="fa fa-upload"></span> Update
+               </button>
+               <button type="button" class="btn btn-default btn-sm ripple light" (click)="closeMyModal('effect-5')">
+                 <span class="fa fa-ban"></span> Cancel
+               </button>
+               
+             </div>
+           </app-modal-animation> 
+    
+
+
+</div>

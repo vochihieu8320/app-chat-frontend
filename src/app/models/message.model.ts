@@ -6,7 +6,7 @@ export class message
     content: string;
     date_time: string;
     files: string;
-    is_video: boolean
+    is_video: boolean;
     constructor(author: string, content: string, date_time: string, userID?:string, channelID?: string, file?: string, is_video?: boolean)
     {
         this.author = author;

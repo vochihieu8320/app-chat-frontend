@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl : "http://18.223.68.13"
+  apiUrl : "https://app-chat-vch-api.herokuapp.com"
 };
 
 

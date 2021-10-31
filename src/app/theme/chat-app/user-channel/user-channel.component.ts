@@ -10,11 +10,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ClipboardService } from 'ngx-clipboard';
 
 
-
-
-
-
-
 @Component({
   selector: 'app-user-channel',
   templateUrl: './user-channel.component.html',
@@ -71,8 +66,10 @@ export class UserChannelComponent implements OnInit {
   formCreate: any;
   UserInformation: any;
   loaddata: boolean = false
+  uploadUserInfo: boolean = false;
   default_img = "assets/images/avatar-blank.jpg";
   user_email: string;
+  userAvatar: any;
   uploader: FileUploader = new FileUploader({
    
     isHTML5: true
@@ -105,17 +102,21 @@ export class UserChannelComponent implements OnInit {
      avatar:""
    }
 
+  
   }
 
   async ngOnInit(){
     this.loading = true
     this.channels = <any> await this.services.getUserChannel(this.userID, 0);
     // this.UserInformation = <any> await this.services.getUserInfo(this.userID);
-    
+    this.current_picked = 0;
+   
+    this.userAvatar = <any[]> await this.services.getChannelUserInfo(this.channels[0].channelID);
+  
     this.channels[0].is_picked = true;
     this.channelID = this.channels[0].channelID;
     this.invite_message = `https://app-chat-vch.herokuapp.com//auth/invite/${this.channelID}`
-    this.current_picked = 0;
+
     this.formInput.name = this.channels[this.current_picked].channels[0].name
     
     const local = localStorage.getItem("currentUser");
@@ -137,7 +138,7 @@ export class UserChannelComponent implements OnInit {
      this.messages = message
    })
 
-   this.socket.on("receive-messages", (messages: message)=>{ 
+   this.socket.on("receive-messages", async(messages: message)=>{ 
      if(messages.author === this.username)
      {
        this.isYou = true;
@@ -146,6 +147,7 @@ export class UserChannelComponent implements OnInit {
      {
        this.isYou = false;
      }
+     
      this.messages.push(messages)
    })
 
@@ -154,8 +156,9 @@ export class UserChannelComponent implements OnInit {
    });
    this.socket.on("received_user_online", (userOnline)=>{
      
-     this.user_online = userOnline
-   })
+     this.user_online = userOnline;
+     console.log("user online", userOnline)
+     })
 
    this.socket.on("user-off-browser", (socketID: string)=>{
      for(let i = 0  ; i < this.user_online.length; i++)
@@ -428,9 +431,37 @@ export class UserChannelComponent implements OnInit {
     }
   }
 
-  async uploadAvatar()
+  async uploadAvatar(user: any, i: any)
   {
+      
+      const data = new FormData();
+      data.append("file", this.file);
+      try {
+          this.uploadUserInfo = true;
+          if(this.file_name)
+          {
+            const respone = <any> await this.services.updateFile(user.userID, user.name, user.channelID, this.file_extension, data);
+            this.UserInformation.avatar = respone.file;
+            this.user_online[i]["userinfo"][0]["avatar"] = respone.file;
+          }
+          await this.services.updateUserInfo(user.userID, this.UserInformation);
+          this.uploadUserInfo = false;
+      } catch (error) {
+        this.loading = false;
+      }
+  }
 
+   getAvatar(userID : string)
+  {
+    
+    for(let i = 0; i < this.userAvatar.length ; i++)
+    {
+      if(this.userAvatar[i].userID === userID && this.userAvatar[i]["userInfo"][0]["avatar"])
+      {
+        return this.userAvatar[i]["userInfo"][0]["avatar"]
+      }
+    }
+    return "https://appchatbucket.s3.us-east-2.amazonaws.com/avatar-blank.jpg-1635606433186.jpeg";
   }
 }
 

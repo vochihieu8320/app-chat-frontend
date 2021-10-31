@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  // apiUrl : "http://127.0.0.1:3000",
+  apiUrl : "https://app-chat-vch-api.herokuapp.com",
   domain: "http://localhost:4200",
-  apiUrl : "http://18.223.68.13"
+  // apiUrl : "http://18.223.68.13"
  
 };
 //"ccm-be-ts.hiq.ai"

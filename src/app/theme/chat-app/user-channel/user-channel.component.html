@@ -208,7 +208,7 @@
 
                                   <li *ngIf="message.author === username">
                                     <p>
-                                      <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
+                                      <img class="media-object img-radius config_avatar"  [src]="getAvatar(message.userID)">
                                       You
                                       <span>
                                         {{message.date_time}}
@@ -219,7 +219,7 @@
                                   </li>
                                   <li *ngIf="message.author !== username">
                                     <p>
-                                      <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
+                                      <img class="media-object img-radius config_avatar"  [src]="getAvatar(message.userID)">
                                     {{message.author}}
                                     <span>
                                       {{message.date_time}}
@@ -236,8 +236,8 @@
 
                                 <li *ngIf="message.author === username">
                                   <p>
-                                    <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
-
+                                    <img class="media-object img-radius config_avatar"  [src]="getAvatar(message.userID)" >
+                                   
                                     You
                                     <span>
                                       {{message.date_time}}
@@ -246,8 +246,8 @@
                                 </li>
                                   <li *ngIf="message.author !== username">
                                     <p>
-                                      <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
-
+                                      <img class="media-object img-radius config_avatar"  [src]="getAvatar(message.userID)">
+                                    
                                       {{message.author}}
                                       <span>
                                         {{message.date_time}}
@@ -264,7 +264,8 @@
                                 <ul style="list-style-type:none;">
                                 <li *ngIf="message.author === username">
                                   <p>
-                                    <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
+                                    <img class="media-object img-radius config_avatar"  [src]="getAvatar(message.userID)" >
+                                                                 
                                     You
                                     <span>
                                       {{message.date_time}}
@@ -274,8 +275,9 @@
                                 </li>
                                   <li *ngIf="message.author !== username">
                                     <p>
-                                      <img class="media-object img-radius" src="{{default_img}}" alt="Generic placeholder image">
-
+                                      <img class="media-object img-radius config_avatar" src="getAvatar(message.userID)">
+                                    
+                                  
                                       {{message.author}}
                                       <span>
                                         {{message.date_time}}
@@ -312,12 +314,13 @@
                     <li>
                     <h5>Onlines</h5>
                     </li>
-                    <li *ngFor="let user of user_online">
+                    <li *ngFor="let user of user_online; index as i">
                   
                     <div class="media" *ngIf="user.name !== username">
                       <div class="media-left media-middle photo-table">
                         <a href="javascript:;" (click)="UserInfo('effect-5', user)">
-                          <img class="media-object img-radius" src="assets/images/avatar-blank.jpg" alt="Generic placeholder image">
+                          <img class="media-object img-radius" src="{{user.userinfo[0].avatar}}" alt="" *ngIf="user.userinfo[0].avatar" style="height: 36px;">
+                          <img class="media-object img-radius" src="../../../../assets/images/avatar-blank.jpg" alt="" *ngIf="!user.userinfo[0].avatar">
                           <div class="live-status bg-success"></div>
                         </a>
                         <app-modal-animation #modalTabs [modalID]="'effect-5'" [modalClass]="'md-effect-1'">
@@ -335,7 +338,7 @@
                               </a>
                               <label class="custom-file" style="position: relative;
                               left: -28px;">
-                                <input type="file" ng2FileSelect [uploader]="uploader" class="custom-file-input" (change)="validateFiles($event,'effect-5' )" >
+                                <input type="file" ng2FileSelect [uploader]="uploader" class="custom-file-input" (change)="validateFiles($event,'effect-5' )" accept="image/*"  >
                                 <span class="custom-file-control"></span>
                               </label>
                             </div>
@@ -376,10 +379,9 @@
                             </form>
                             </div>
                           </div>
-                          <div class="row justify-content-end">
-                            <button type="button" class="btn btn-primary btn-sm ripple light" >
-                              <span class="fa fa-upload"></span> Update
-                            </button>
+                        
+                          <div class="row justify-content-end" *ngIf="!uploadUserInfo">
+                            
                             <button type="button" class="btn btn-default btn-sm ripple light" (click)="closeMyModal('effect-5')">
                               <span class="fa fa-ban"></span> Cancel
                             </button>
