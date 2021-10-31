@@ -35,16 +35,16 @@ const MENUITEMS = [
     label: 'Navigation',
     main: [
       {
-        state: 'general',
+        state: 'chat-app',
         short_label: 'N',
         name: 'chat-app',
         type: 'link',
         icon: 'icon-layout-cta-right',
       },
       {
-        state: 'Your Profile',
+        state: 'user-profile',
         short_label: 'N',
-        name: 'your Profile',
+        name: 'user-profile',
         type: 'link',
         icon: 'icon-layout-cta-right',
       }

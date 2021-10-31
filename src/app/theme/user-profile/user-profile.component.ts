@@ -35,8 +35,10 @@ export class UserProfileComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.loading = true
-    this.userID = this.route.snapshot.paramMap.get("userID"); 
+    this.loading = true;
+    const local = localStorage.getItem("currentUser");
+    const userInfo = JSON.parse(local);
+    this.userID = userInfo["id"]
     this.UserInformation = await this.services.getUserInfo(this.userID);
     this.preview_image = this.UserInformation.avatar
     this.loading = false;

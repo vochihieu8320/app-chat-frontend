@@ -45,7 +45,6 @@ export class AcceptInviteComponent implements OnInit {
         channelID: this.user_channel
       }
       const respone = <any> await this.service.joinchanel(body);
-      console.log("response", respone)
       const returnUrl = `auth/invite/${this.user_channel}`;
       if(respone.data)
       {

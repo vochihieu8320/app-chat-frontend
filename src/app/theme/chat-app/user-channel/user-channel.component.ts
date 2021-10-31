@@ -60,7 +60,7 @@ export class UserChannelComponent implements OnInit {
   classname: string;
   current_picked : any;
   loading: boolean = false;
-  user_online : any[];
+  user_online : any[] = [];
   invite_message: string;
   formInput: any;
   formCreate: any;
@@ -112,13 +112,13 @@ export class UserChannelComponent implements OnInit {
     this.current_picked = 0;
    
     this.userAvatar = <any[]> await this.services.getChannelUserInfo(this.channels[0].channelID);
-  
+    // console.log("user avatar", this.userAvatar);
     this.channels[0].is_picked = true;
     this.channelID = this.channels[0].channelID;
-    this.invite_message = `https://app-chat-vch.herokuapp.com//auth/invite/${this.channelID}`
-
-    this.formInput.name = this.channels[this.current_picked].channels[0].name
+    this.invite_message = `${environment.domain}/auth/invite/${this.channelID}`
     
+    this.formInput.name = this.channels[this.current_picked].channels[0].name
+    // console.log("name", this.channels[this.current_picked].channels[0].name)
     const local = localStorage.getItem("currentUser");
     const userInfo = JSON.parse(local);
 
@@ -153,12 +153,11 @@ export class UserChannelComponent implements OnInit {
 
    this.socket.emit("get_user_online", this.channelID, (respone)=>{
       
-   });
-   this.socket.on("received_user_online", (userOnline)=>{
-     
-     this.user_online = userOnline;
-     console.log("user online", userOnline)
-     })
+  });
+  this.socket.on("received_user_online", (userOnline)=>{
+    
+    this.user_online = userOnline;
+    })
 
    this.socket.on("user-off-browser", (socketID: string)=>{
      for(let i = 0  ; i < this.user_online.length; i++)
@@ -206,7 +205,8 @@ export class UserChannelComponent implements OnInit {
     this.file_extension = check_file[1];
     this.file_type = check_file[0];
 
-    const check_size = this.getFileSize(this.file.size)
+    const check_size = this.getFileSize(this.file.size);
+    const check_fileunit = this.getFileUnit(this.file.size);
     this.file_size = `${check_size} ${this.getFileUnit(this.file.size)}`
     
     if((this.file_type === "images" && !this.extensions_img.includes(this.file_extension)) || (this.file_type === "video" && !this.extensions_video.includes(this.file_extension)))
@@ -216,7 +216,7 @@ export class UserChannelComponent implements OnInit {
       Swal.fire('Invalid file type!', '', 'error');
        return;
     }
-    if(check_size > 8)
+    if(check_size > 8 && check_fileunit === "MB")
     {
       this.closeMyModal(modal);
       Swal.fire('Your file is too powerful', 'Max file size is 8.00MB please', 'error');
@@ -308,14 +308,17 @@ export class UserChannelComponent implements OnInit {
 
   async ChangeChannel(i: any)
   {
-   
-    this.invite_message = `https://app-chat-vch.herokuapp.com/auth/invite/${this.channels[this.current_picked]._id}`
+    this.channels[this.current_picked].is_picked = false;
+    this.current_picked = i;
+    this.invite_message = `${environment.domain}/auth/invite/${this.channels[this.current_picked].channelID}`
     this.channels[this.current_picked].is_picked = false;
     this.channels[i].is_picked = true;
-    this.current_picked = i;
     this.formInput.name = this.channels[this.current_picked].channels[0].name;
     try {
+      this.loading = true
       this.messages = <any>await this.services.getConversation(this.channels[i].channelID);
+      this.user_online = <any[]> await this.services.getChannelUserInfo(this.channels[this.current_picked]["channelID"])
+      this.loading = false;
      
     } catch (error) {
       
@@ -404,6 +407,7 @@ export class UserChannelComponent implements OnInit {
           const respone = <any>await this.services.deleteChannel(this.userID, current_channel["_id"]);
           this.channels.splice(this.current_picked  , 1);
           this.messages = [];
+          this.user_online = [];
           this.socket.emit("disconnected",this.userID, this.channels, (respone)=>{
             console.log("respone", respone)
           } )

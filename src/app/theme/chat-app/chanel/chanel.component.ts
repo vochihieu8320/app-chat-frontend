@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {transition, trigger, style, animate} from '@angular/animations';
 import {AppChatService} from '../../../services/app-chat/app-chat.service';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-chanel',
   templateUrl: './chanel.component.html',
@@ -25,7 +25,7 @@ export class ChanelComponent implements OnInit {
   user_id: string;
   loading: boolean;
   user_email: string;
-  constructor(private service: AppChatService,  private router: Router) { 
+  constructor(private service: AppChatService,  private router: Router, private route: ActivatedRoute) { 
    
     const local = localStorage.getItem("currentUser");
     const user_info =JSON.parse(local);
@@ -79,6 +79,7 @@ export class ChanelComponent implements OnInit {
     
     await this.service.joinchanel(join_channel)
      this.loading = false;
+     this.router.navigate([`chat-app/user-channel/${this.user_id}`])
    } catch (error) {
      this.loading = false
    } 

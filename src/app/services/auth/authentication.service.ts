@@ -37,7 +37,6 @@ export class AuthenticationService {
 
 
   login(email: string, password: string): Observable<any> {
-    console.log("environment", environment.apiUrl);
     return this.http.post<any>(`${environment.apiUrl}/users/login`, { email, password })
       .pipe(map(data => {
       

@@ -13,7 +13,7 @@
     
       <div class="card-block email-card" *ngIf="!loading">
 
-        <div class="mail-body-header" style="text-align: end;" *ngIf="channels">
+        <div class="mail-body-header" style="text-align: end;" >
           <button type="button" class="btn btn-primary btn-sm ripple light" (click)="openMyModal('effect-2')">
             <i class="fas fa-user-plus"></i>
           </button>
@@ -23,7 +23,7 @@
               <div style="text-align: left;">
                 
                 
-                    <span  class="card-title" style="font-size: 22px;" > #INVITE FRIENDS TO {{channels[current_picked].channels[0].name}}</span>
+                    <span  class="card-title" style="font-size: 22px;" *ngIf="channels[current_picked].channels[0]"> #INVITE FRIENDS TO {{channels[current_picked].channels[0].name}}</span>
                    
                 
                 
@@ -163,7 +163,7 @@
         <div class="row">
         
           <div class="col-lg-12 col-xl-2" >
-            <div class="user-body mt-3" style="height: 300px; overflow-y: auto;">
+            <div class="user-body mt-3" style="height: 408px; overflow-y: auto;">
             
             
                 <h5>Channels</h5>
@@ -191,7 +191,7 @@
           </div>
        
         
-          <div class="col-lg-12 col-xl-8">
+          <div class="col-lg-12 col-xl-7">
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="e-inbox" role="tabpanel">
 
@@ -275,7 +275,7 @@
                                 </li>
                                   <li *ngIf="message.author !== username">
                                     <p>
-                                      <img class="media-object img-radius config_avatar" src="getAvatar(message.userID)">
+                                      <img class="media-object img-radius config_avatar" [src]="getAvatar(message.userID)">
                                     
                                   
                                       {{message.author}}
@@ -307,20 +307,20 @@
             </div>
           </div>
         
-          <div class="col-lg-12 col-xl-2">
-            <div class="user-body">
+          <div class="col-lg-12 col-xl-3">
+            <div class="user-body" style="height: 408px; overflow-y: auto;">
 
                 <ul class="p-20 label-list">
                     <li>
-                    <h5>Onlines</h5>
+                    <h5>Members</h5>
                     </li>
                     <li *ngFor="let user of user_online; index as i">
                   
-                    <div class="media" *ngIf="user.name !== username">
+                    <div class="media" *ngIf="user.userInfo[0].name !== username">
                       <div class="media-left media-middle photo-table">
                         <a href="javascript:;" (click)="UserInfo('effect-5', user)">
-                          <img class="media-object img-radius" src="{{user.userinfo[0].avatar}}" alt="" *ngIf="user.userinfo[0].avatar" style="height: 36px;">
-                          <img class="media-object img-radius" src="../../../../assets/images/avatar-blank.jpg" alt="" *ngIf="!user.userinfo[0].avatar">
+                          <img class="media-object img-radius" src="{{user.userInfo[0].avatar}}" alt="" *ngIf="user.userInfo[0].avatar" style="height: 36px;">
+                          <img class="media-object img-radius" src="../../../../assets/images/avatar-blank.jpg" alt="" *ngIf="!user.userInfo[0].avatar">
                           <div class="live-status bg-success"></div>
                         </a>
                         <app-modal-animation #modalTabs [modalID]="'effect-5'" [modalClass]="'md-effect-1'">
@@ -336,11 +336,7 @@
                                 " src="{{UserInformation.avatar}}" alt="user-img" width="200px"
                                   height="200px">
                               </a>
-                              <label class="custom-file" style="position: relative;
-                              left: -28px;">
-                                <input type="file" ng2FileSelect [uploader]="uploader" class="custom-file-input" (change)="validateFiles($event,'effect-5' )" accept="image/*"  >
-                                <span class="custom-file-control"></span>
-                              </label>
+                           
                             </div>
                             <div class="col-sm-6 col-md-6 col-12">
                               <form #validationForm="ngForm" class="editForm" novalidate>
@@ -349,7 +345,7 @@
                                   <div class="col-md-12">
                                     <div class="form-group" style="text-align: left;">
                                       <label class="form-label mb-2">Name</label>
-                                      <input type="text" class="form-control" name="name" style="color: black;"
+                                      <input type="text" class="form-control" disabled name="name" style="color: black;"
                                        placeholder="Enter name" [ngClass]="{'is-invalid': !name.valid && (name.dirty || name.touched || isSubmit)}" #name="ngModel" minlength="6" required [(ngModel)]="UserInformation.name">
                                       <label *ngIf="!name.valid && (name.dirty || name.touched || isSubmit)" id="validation-name-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid name.</label>
                                     </div>
@@ -358,7 +354,7 @@
                                   <div class="col-md-12">
                                     <div class="form-group" style="text-align: left;">
                                       <label class="form-label mb-2">Email</label>
-                                      <input type="email" class="form-control" name="email" style="color: black;"
+                                      <input type="email" class="form-control" name="email" disabled style="color: black;"
                                        placeholder="Enter email" [ngClass]="{'is-invalid': !email.valid && (email.dirty || email.touched || isSubmit)}" #email="ngModel" minlength="6" required [(ngModel)]="UserInformation.email">
                                       <label *ngIf="!email.valid && (email.dirty || email.touched || isSubmit)" id="validation-name-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid name.</label>
                                     </div>
@@ -367,7 +363,7 @@
                                   <div class="col-md-12">
                                     <div class="form-group" style="text-align: left;">
                                       <label class="form-label mb-2">Phone</label>
-                                      <input type="email" class="form-control" name="Phone" style="color: black;"
+                                      <input type="email" class="form-control" name="Phone" disabled style="color: black;"
                                        placeholder="Enter phone" [ngClass]="{'is-invalid': !phone.valid && (phone.dirty || phone.touched || isSubmit)}" #phone="ngModel" minlength="6" required [(ngModel)]="UserInformation.phone">
                                       <label *ngIf="!phone.valid && (phone.dirty || phone.touched || isSubmit)" id="validation-name-error" class="error jquery-validation-error small form-text invalid-feedback">Please enter a valid name.</label>
                                     </div>
@@ -393,7 +389,7 @@
                         <h6 style="    
                         position: relative;
                         bottom: -14px;
-                        right: 23px">{{user.name}}</h6>
+                        right: 23px">{{user.userInfo[0].name}}</h6>
                       
                       </div>
                     </div>
