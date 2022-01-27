@@ -38,11 +38,10 @@ export class CategoriesComponent implements OnInit {
   current_children:number = 0;
   async ngOnInit() {
     this.loading = true;
-    this.categories = <any> await this.services.index(0, 5);
+    const result = <any> await this.services.index(0, 5);
+    this.categories = result.data;
+    this.totalItems = result.count;
     this.loading = false;
-    console.log(this.categories);
-    const length = <any> await this.services.length();
-    this.totalItems = length.data;
     this.formInput = {
       name: ""
     }  
@@ -97,13 +96,15 @@ export class CategoriesComponent implements OnInit {
   async edit(event, id, i){
     try {
       this.current_index = i;
+      console.log("im here")
       this.loading = true;
       const result = <any> await this.services.show(id);
+      console.log(result)
       this.formInput.name = result.data.name;
       this.openMyModal(event);
       this.loading = false;
     } catch (error) {
-      
+      console.log(error)
     }
   }
 

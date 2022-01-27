@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   domain: "http://localhost:4200",
   apiUrl : "https://wnc-be-18.herokuapp.com"
+  // apiUrl : "http://localhost:3000"
+
 };
 //"ccm-be-ts.hiq.ai"
 /*
