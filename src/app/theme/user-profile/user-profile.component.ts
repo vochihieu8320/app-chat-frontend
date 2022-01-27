@@ -91,7 +91,6 @@ export class UserProfileComponent implements OnInit {
     const check_size = this.getFileSize(this.file.size);
     const check_fileunit = this.getFileUnit(this.file.size);
     this.file_size = `${check_size} ${check_fileunit}`
-    console.log("file size", this.file_size) 
     if((this.file_type === "images" && !this.extensions_img.includes(this.file_extension)) || (this.file_type === "video" && !this.extensions_video.includes(this.file_extension)))
     {
 

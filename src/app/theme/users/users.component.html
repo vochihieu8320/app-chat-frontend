@@ -1,0 +1,74 @@
+<div class="preloader3 loader-block" *ngIf="loading">
+    <div class="circ1"></div>
+    <div class="circ2"></div>
+    <div class="circ3"></div>
+    <div class="circ4"></div>
+  </div>
+  <app-card [title]="'Your products'" [classHeader]="true" [blockClass]="'table-border-style'" [cardOptionBlock]="true">
+      <div class="table-responsive checkscroll">
+        <table id="mytable" class="table  table-bordered">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <th>Email</th>
+              <th>User type</th>
+              <th>Option</th>
+            </tr>
+          </thead>
+      
+          <tbody>
+            <tr *ngFor="let user of users; index as i">
+              <td>
+                  {{user.name}}
+              </td>
+              <td>
+                  {{user.email}}
+              </td>
+              <td>
+                  <span *ngIf="user.user_type == 1 ">
+                      bider
+                  </span>
+                  <span *ngIf="user.user_type == 2 ">
+                     seller
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <div ngbDropdown class="dropdown-primary mr-2">
+                    <button ngbDropdownToggle class="btn btn-sm btn-primary btn-outline-primary" type="button">Option</button>
+                    <div ngbDropdownMenu>
+                     <button mat-menu-item style="border: none; background: none; outline:none" type="button"  
+                     class="dropdown-item ripple light" (click)="resetPassword(user._id)"
+                    >
+                    <i class="fas fa-trash-alt"></i>
+                      <span style=" margin-left: 2px">Reset Password</span>
+                   </button>
+                   <button mat-menu-item style="border: none; background: none; outline:none" type="button"  
+                     class="dropdown-item ripple light" (click)="seller_to_bider(user._id)"  *ngIf="user.user_type == 2 "
+                    >
+                    <i class="fas fa-trash-alt"></i>
+                      <span style=" margin-left: 2px">Seller to Bider</span>
+                   </button>
+                    </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+         
+        </table>
+      </div>
+      <div class="row justify-content-end">
+      
+      <app-card>
+        <ngb-pagination
+        [pageSize] = "pagesize"
+        [collectionSize]="totalItems"
+        [boundaryLinks]="true"
+        [(page)]="currentPage"
+        (pageChange)="onPageChange(currentPage)"
+        [maxSize]="maxSize"
+        ></ngb-pagination>
+      </app-card>
+      
+      </div>
+      
+      </app-card>

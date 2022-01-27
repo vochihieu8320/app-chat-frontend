@@ -16,23 +16,26 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'chat-app',
+        redirectTo: 'categories',
         pathMatch: 'full'
       },
-      // { 
-      //   path: 'home',
-      //   loadChildren : () => import('./theme/home/home.module').then(m => m.HomeModule)
-      // },
-      
       {
-        path: 'chat-app',
-        loadChildren: () => import('./theme/chat-app/chat-app.module').then(m => m.ChatAppModule)
+        path: 'categories',
+        loadChildren: () => import('./theme/categories/categories.module').then(m => m.CategoriesModule)
       },
       {
-        path: 'user-profile',
-        loadChildren: ()=>import('./theme/user-profile/user-profile.module').then(m=> m.UserProfileModule)
-      }
+        path: 'products',
+        loadChildren: () => import('./theme/products/products.module').then(m => m.ProductsModule)
+      },
      
+      {
+        path: 'inboxes',
+        loadChildren: () => import('./theme/inbox/inbox.module').then(m=> m.InboxModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./theme/users/users.module').then(m => m.UsersModule)
+      }
     
      
      
@@ -52,7 +55,7 @@ const routes: Routes = [
         loadChildren: () => import('./theme/widget/widget.module').then(m => m.WidgetModule)
       },
       {
-        path: 'basic',
+        path: 'basic',cd 
         loadChildren: () => import('./theme/ui-elements/basic/basic.module').then(m => m.BasicModule)
       },
       {

@@ -18,7 +18,6 @@ export class AppChatService {
 
    GetNewToken()
   {
-    
     return new Promise(async (resolve, resject)=>{
       const check_expired_token = this.authService.CheckExpiredToken();
  
@@ -33,16 +32,12 @@ export class AppChatService {
           console.log(error);
           resolve(false)
         }
-     
-        
       }
       else
       {
         resolve(true)
       }
     })
-   
-    
   }
 
 
@@ -125,6 +120,8 @@ export class AppChatService {
     await this.CreateHeader();
     return this.http.get(`${environment.apiUrl}/channels-user/${channelID}/users`, {headers: this.Header}).toPromise();
   }
+
+  //get all user of channel
 
 }
 

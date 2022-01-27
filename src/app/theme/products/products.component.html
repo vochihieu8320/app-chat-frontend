@@ -1,0 +1,65 @@
+<div class="preloader3 loader-block" *ngIf="loading">
+    <div class="circ1"></div>
+    <div class="circ2"></div>
+    <div class="circ3"></div>
+    <div class="circ4"></div>
+  </div>
+  <app-card [title]="'Your products'" [classHeader]="true" [blockClass]="'table-border-style'" [cardOptionBlock]="true">
+      <div class="table-responsive checkscroll">
+        <table id="mytable" class="table  table-bordered">
+          <thead>
+            <tr>
+              <td>Name</td>
+              <th>Image</th>
+              <th>Seller</th>
+              <th>Price</th>
+              <th>Option</th>
+            </tr>
+          </thead>
+      
+          <tbody>
+            <tr *ngFor="let product of products; index as i">
+              <td>{{product.name}}</td>
+              <td>
+                  <img src={{product.img}} style="height:100% ; width:200px"/>
+              </td>
+              <td>
+                  {{product.owner[0].name}}
+              </td>
+              <td>
+                  {{product.price}}
+              </td>
+              <td style="text-align:center;">
+                <div ngbDropdown class="dropdown-primary mr-2">
+                    <button ngbDropdownToggle class="btn btn-sm btn-primary btn-outline-primary" type="button">Option</button>
+                    <div ngbDropdownMenu>
+                     <button mat-menu-item style="border: none; background: none; outline:none" type="button"  
+                     class="dropdown-item ripple light" (click)="delete(product._id)"
+                    >
+                    <i class="fas fa-trash-alt"></i>
+                      <span style=" margin-left: 2px">Delete</span>
+                   </button>
+                    </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+         
+        </table>
+      </div>
+      <div class="row justify-content-end">
+      
+      <app-card>
+        <ngb-pagination
+        [pageSize] = "pagesize"
+        [collectionSize]="totalItems"
+        [boundaryLinks]="true"
+        [(page)]="currentPage"
+        (pageChange)="onPageChange(currentPage)"
+        [maxSize]="maxSize"
+        ></ngb-pagination>
+      </app-card>
+      
+      </div>
+      
+      </app-card>

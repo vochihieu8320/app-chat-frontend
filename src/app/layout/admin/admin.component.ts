@@ -192,9 +192,9 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.freamType = 'theme1';
     this.sidebarImg = 'false';
     this.sidebarImgType = 'img1';
-    this.layoutType = 'dark'; // light(default) dark(dark)
+    this.layoutType = 'light'; // light(default) dark(dark)
 
-    this.headerTheme = 'theme6'; // theme1(default)
+    this.headerTheme = 'theme1'; // theme1(default)
     this.pcodedHeaderPosition = 'fixed';
 
     this.headerFixedTop = 'auto';
@@ -214,7 +214,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.navBarTheme = 'themelight1'; // themelight1(default) theme1(dark)
     this.activeItemTheme = 'theme1';
     this.pcodedSidebarPosition = 'fixed';
-    this.menuTitleTheme = 'theme1'; // theme1(default) theme10(dark)
+    this.menuTitleTheme = 'theme10'; // theme1(default) theme10(dark)
     this.dropDownIcon = 'style3';
     this.subItemIcon = 'style7';
 

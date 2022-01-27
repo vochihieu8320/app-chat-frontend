@@ -91,27 +91,12 @@ export class AuthenticationService {
         if((currentUser && expired_token < current_date.getTime()) || !currentUser)
         {         
           // get refreshtoken
-          try {
-            const response =<any> await this.refreshtoken();
-            if(response.token && response.refreshToken)
-            {
-              this.setLocalUserProfile(response.token, response.refreshToken)
-              return true;
-            }
-            else
-            {
-              return false;
-            }
-          } catch (error) {
-            return false
-          }
-         
+          return false;
         }
         else
         {
           return true
         }
-      
     }
     else
     {

@@ -1,0 +1,136 @@
+   <div class="page-body">
+    <div class="card">
+      <!-- Email-card start -->
+      <div class="card-block email-card">
+        <div class="row">
+          <!-- Left-side section start -->
+          <div class="col-lg-12 col-xl-3">
+            <div class="user-body">
+              <ul class="page-list nav nav-tabs flex-column" id="pills-tab" role="tablist">
+                <li class="nav-item mail-section">
+                  <a [routerLinkActive]="['active']" class="nav-link waves-effect d-block" data-toggle="pill" role="tab"
+                  (click)="search(0)">
+                    <i class="icofont icofont-inbox"></i> Inbox
+                  </a>
+                </li>
+                <li class="nav-item mail-section">
+                  <a [routerLinkActive]="['active']" class="nav-link waves-effect d-block"  data-toggle="pill"  role="tab"
+                  (click)="search(1)">
+                    <i class="icofont icofont-star"></i> Pending
+                  </a>
+                </li>
+                <li class="nav-item mail-section">
+                  <a [routerLinkActive]="['active']" class="nav-link waves-effect d-block" data-toggle="pill"  role="tab"
+                  (click)="search(2)">
+                    <i class="icofont icofont-file-text"></i> Aprove
+                  </a>
+                </li>
+                <li class="nav-item mail-section">
+                  <a [routerLinkActive]="['active']" class="nav-link waves-effect d-block"  data-toggle="pill" role="tab"
+                  (click)="search(3)">
+                    <i class="icofont icofont-paper-plane"></i> Reject
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Left-side section end -->
+          <!-- Right-side section start -->
+          <div class="col-lg-12 col-xl-9">
+            <div class="tab-content" id="pills-tabContent">
+             <div class="tab-pane fade show active" id="e-inbox" role="tabpanel">
+
+    <div class="mail-body">
+      <!-- <div class="mail-body-header">
+        <button type="button" class="btn btn-primary btn-xs waves-effect waves-light">
+          <i class="icofont icofont-exclamation-circle"></i>
+        </button>
+        <button type="button" class="btn btn-success btn-xs waves-effect waves-light">
+          <i class="icofont icofont-inbox"></i>
+        </button>
+        <button type="button" class="btn btn-danger btn-xs waves-effect waves-light">
+          <i class="icofont icofont-ui-delete"></i>
+        </button>
+        <div ngbDropdown class="btn-group dropdown-split-primary">
+          <button ngbDropdownToggle type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icofont icofont-ui-folder"></i>
+          </button>
+          <div ngbDropdownMenu class="dropdown-menu">
+            <a class="dropdown-item waves-effect waves-light" href="javascript:">Action</a>
+            <a class="dropdown-item waves-effect waves-light" href="javascript:">Another action</a>
+            <a class="dropdown-item waves-effect waves-light" href="javascript:">Something else</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item waves-effect waves-light" href="javascript:">Separated link</a>
+          </div>
+        </div>
+        <div ngbDropdown class="btn-group dropdown-split-primary">
+          <button ngbDropdownToggle type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More
+          </button>
+          <div ngbDropdownMenu class="dropdown-menu">
+            <a class="dropdown-item waves-effect waves-light" href="javascript:">Action</a>
+            <a class="dropdown-item waves-effect waves-light" href="javascript:">Another action</a>
+            <a class="dropdown-item waves-effect waves-light" href="javascript:">Something else</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item waves-effect waves-light" href="javascript:">Separated link</a>
+          </div>
+        </div>
+      </div> -->
+      <div class="mail-body-content">
+        <div class="table-responsive">
+          <table class="table">
+            <tr class="unread" *ngFor= "let inbox of inboxes">
+              <td><a [routerLink]="['/email/email-read/']" class="email-name waves-effect">{{inbox.own[0].name}}</a></td>
+              <td><a [routerLink]="['/email/email-read/']" class="email-name waves-effect">{{inbox.content}}</a></td>
+              <td class="email-time">
+                  <div *ngIf="inbox.status == 1">
+                    <label class="badge badge-warning">pending</label>
+                  </div>
+                  <div *ngIf="inbox.status == 2">
+                    <label class="badge badge-success">aprove</label>
+                  </div>
+                  <div *ngIf="inbox.status  == 3">
+                    <label class="badge bg-danger">reject</label>
+                  </div>
+              </td>
+              <td *ngIf="inbox.status == 1"> 
+                <div ngbDropdown class="btn-group dropdown-split-primary">
+                    <button ngbDropdownToggle type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      More
+                    </button>
+                    <div ngbDropdownMenu class="dropdown-menu">
+                      <a class="dropdown-item waves-effect waves-light" href="javascript:"(click)="update(inbox._id)">Approve</a>
+                    </div>
+                  </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+            </div>
+          </div>
+          <!-- Right-side section end -->
+        </div>
+      </div>
+      <!-- Email-card end -->
+      <div class="row justify-content-end" style="margin-right: 10px;">
+      
+        <app-card>
+          <ngb-pagination
+          [pageSize] = "pagesize"
+          [collectionSize]="totalItems"
+          [boundaryLinks]="true"
+          [(page)]="currentPage"
+          (pageChange)="onPageChange(currentPage)"
+          [maxSize]="maxSize"
+          ></ngb-pagination>
+        </app-card>
+        
+        </div>
+    </div>
+    
+  </div>
+  

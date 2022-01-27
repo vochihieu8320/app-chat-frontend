@@ -35,20 +35,33 @@ const MENUITEMS = [
     label: 'Navigation',
     main: [
       {
-        state: 'chat-app',
+        state: 'categories',
         short_label: 'N',
-        name: 'chat-app',
+        name: 'categories',
         type: 'link',
         icon: 'icon-layout-cta-right',
       },
       {
-        state: 'user-profile',
+        state: 'products',
         short_label: 'N',
-        name: 'user-profile',
+        name: 'products',
         type: 'link',
         icon: 'icon-layout-cta-right',
-      }
-     
+      },
+      {
+        state: 'users',
+        short_label: 'N',
+        name: 'users',
+        type: 'link',
+        icon: 'icon-layout-cta-right',
+      },
+      {
+        state: 'inboxes',
+        short_label: 'N',
+        name: 'inboxes',
+        type: 'link',
+        icon: 'icon-layout-cta-right',
+      },
     ],
   },
 ];
