@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   domain: "http://localhost:4200",
-  apiUrl : "http://localhost:3000"
+  apiUrl : "https://wnc-be-18.herokuapp.com"
 };
 
 

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   domain: "http://localhost:4200",
-  apiUrl : "http://localhost:3000"
+  apiUrl : "https://wnc-be-18.herokuapp.com"
 };
 //"ccm-be-ts.hiq.ai"
 /*
@@ -15,4 +15,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.https://wnc-be-18.herokuapp.com/
